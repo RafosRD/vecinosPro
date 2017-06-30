@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Bloque nuevo
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page21">
+    <ion-item id="bloqueNuevo-input24">
+      <ion-label></ion-label>
+      <ion-input type="text" placeholder="Nombre del bloque" [(ngModel)]="bloque.nombre"></ion-input>
+    </ion-item>
+  <button id="bloqueNuevo-button19" ion-button color="positive" block on-click="goToEdificio()">
+    Guardar
+  </button>
+</ion-content>

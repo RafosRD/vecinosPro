@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Anuncios
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page3">
+  <ion-list id="anuncios-list4">
+
+
+    <ion-item *ngFor="let anuncio of anuncios" (click)="goToAnuncio(anuncio.id)" id="ListItemAnuncio">
+      {{anuncio.titulo}}
+      <ion-note item-right>
+
+      </ion-note>
+      <ion-icon name="arrow-forward" item-right>
+
+      </ion-icon>
+    </ion-item>
+
+
+  </ion-list>
+  <button id="anuncios-button4" ion-button color="positive" block on-click="goToAnuncioNuevo()">
+    Nuevo anuncio
+  </button>
+
+  <!--*ngIf=""-->
+</ion-content>

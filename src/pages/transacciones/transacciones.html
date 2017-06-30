@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Transacciones
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page2">
+  <ion-list id="transacciones-list3">
+    <ion-item color="none" on-click="goToTransaccion()" id="transacciones-list-item1">
+      Pago x
+      <ion-note item-right></ion-note>
+      <ion-icon name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+  </ion-list>
+  <button id="transacciones-button5" ion-button color="positive" block on-click="goToTransacciNNueva()">
+    Nueva transaccion
+  </button>
+</ion-content>

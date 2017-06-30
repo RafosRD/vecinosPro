@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Registrarse
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page6">
+    <ion-list id="registrarse-list2">
+      <ion-item id="registrarse-input3">
+        <ion-label>
+          Nombre
+        </ion-label>
+        <ion-input type="text" placeholder="" [(ngModel)]="perfil.nombre"></ion-input>
+      </ion-item>
+      <ion-item id="registrarse-input6">
+        <ion-label>
+          Telefono
+        </ion-label>
+        <ion-input type="tel" placeholder="" [(ngModel)]="perfil.telefono"></ion-input>
+      </ion-item>
+      <ion-item id="registrarse-input7">
+        <ion-label>
+          Profesión
+        </ion-label>
+        <ion-input type="text" placeholder="" [(ngModel)]="perfil.profesion"></ion-input>
+      </ion-item>
+      <ion-item id="registrarse-input4">
+        <ion-label>
+          Email
+        </ion-label>
+        <ion-input type="email" placeholder="" [(ngModel)]="perfil.email"></ion-input>
+      </ion-item>
+      <ion-item id="registrarse-input5">
+        <ion-label>
+          Password
+        </ion-label>
+        <ion-input type="password" placeholder="" [(ngModel)]="perfil.password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button id="registrarse-button3" ion-button color="stable" block on-click="goToLogin()">
+      Sign up
+    </button>
+
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Anuncio nuevo
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page10">
+    <ion-item id="anuncioNuevo-select3">
+      <ion-label>
+        Edificio
+      </ion-label>
+      <ion-select name=""></ion-select>
+    </ion-item>
+    <ion-item id="anuncioNuevo-input12">
+      <ion-label></ion-label>
+      <ion-input type="text" placeholder="Titulo" [(ngModel)]="anuncio.titulo">
+
+      </ion-input>
+    </ion-item>
+    <ion-item id="anuncioNuevo-input14">
+      <ion-label></ion-label>
+      <ion-input type="textarea" placeholder="Detalle" [(ngModel)]="anuncio.descripcion">
+
+      </ion-input>
+    </ion-item>
+  <button id="anuncioNuevo-button7" ion-button color="positive" block on-click="goToAnuncios()">
+    Guardar
+  </button>
+</ion-content>

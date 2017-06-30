@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Edificio
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page19">
+  <h1 id="edificio-heading8" style="color:#000000;">
+    {{edificio.nombre}}
+  </h1>
+  <div id="edificio-markdown29" class="show-list-numbers-and-dots">
+    <p style="color:#000000;">
+      {{admin.nombre}}
+    </p>
+  </div>
+  <div id="edificio-markdown33" class="show-list-numbers-and-dots">
+    <p style="color:#000000;">
+      Bloques:
+    </p>
+  </div>
+  <ion-list id="edificio-list11">
+    <ion-item *ngFor="let bloque of bloques" color="none" on-click="goToBloque(bloque.id)" id="edificio-list-item9">
+      {{bloque.nombre}}
+      <ion-icon name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+  </ion-list>
+  <button id="edificio-button17" ion-button color="positive" block on-click="goToBloqueNuevo(edificio.id)">
+    Nuevo bloque
+  </button>
+</ion-content>

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Nuevo edificio
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page23">
+    <ion-item id="nuevoEdificio-input27">
+      <ion-label></ion-label>
+      <ion-input Ftype="text" placeholder="Nombre del edificio" [(ngModel)]="edificio.nombre"></ion-input>
+    </ion-item>
+  <button id="nuevoEdificio-button21" ion-button color="positive" block on-click="goToEdificios()">
+    Guardar
+  </button>
+</ion-content>

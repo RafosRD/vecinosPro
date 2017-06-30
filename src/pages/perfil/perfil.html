@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Perfil
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page14">
+  <h1 id="perfil-heading6" style="color:#000000;">
+    {{perfil.nombre}}
+  </h1>
+  <div id="perfil-markdown22" class="show-list-numbers-and-dots">
+    <p style="color:#000000;">
+      {{perfil.profesion}}
+    </p>
+  </div>
+  <div id="perfil-markdown23" class="show-list-numbers-and-dots">
+    <p style="color:#000000;">
+      {{perfil.telefono}}
+    </p>
+  </div>
+  <div id="perfil-markdown24" class="show-list-numbers-and-dots">
+    <p style="color:#000000;">
+      {{perfil.email}}
+    </p>
+  </div>
+  <button id="perfil-button11" ion-button color="positive" block on-click="goToRegistrarse()">
+    Editar
+  </button>
+</ion-content>

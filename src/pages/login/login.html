@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page5">
+
+    <div>
+      <img src="assets/img/71Zmu5b0RjipvgBo9cwV_cYpWBt2zS6SCGxFVaB1Y_Vecionospro.jpg" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+    </div>
+    <div class="spacer" style="height:40px;" id="login-spacer1"></div>
+    <ion-list id="login-list1">
+      <ion-item id="login-input1">
+        <ion-label>
+          Email
+        </ion-label>
+        <ion-input type="email" placeholder="" [(ngModel)]="user.email"></ion-input>
+      </ion-item>
+      <ion-item id="login-input2">
+        <ion-label>
+          Password
+        </ion-label>
+        <ion-input type="password" placeholder="" [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="spacer" style="height:40px;" id="login-spacer2"></div>
+    <button id="login-button1" ion-button color="stable" block on-click="Login()">
+      Log in
+    </button>
+    <button id="login-button2" ion-button clear color="positive" block on-click="goToRegistrarse()">
+      O crea una cuenta
+    </button>
+</ion-content>

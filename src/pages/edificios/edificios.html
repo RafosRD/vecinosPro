@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Edificios
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page18">
+  <ion-list id="edificios-list10">
+    <ion-item *ngFor="let edificio of edificios" color="none" on-click="goToEdificio(edificio.id)"  id="edificios-list-item8">
+      {{edificio.nombre}}
+      <ion-note item-right>
+
+
+      </ion-note>
+      <ion-icon name="arrow-forward" item-right></ion-icon>
+    </ion-item>
+  </ion-list>
+  <button id="edificios-button16" ion-button color="positive" block on-click="goToNuevoEdificio()">
+    Adminsitrar un edificio
+  </button>
+</ion-content>
