@@ -15,7 +15,7 @@ export class EdificioPage {
   edificio = {id:null, adminId:null, nombre:null};
   admin = {nombre:null}
   public id=null;
-  bloques = null;
+  public bloques = [];
 
   constructor(public navCtrl: NavController, public navParams:NavParams, EdificiosService:EdificiosService, PerfilesService:PerfilesService) {
 
@@ -33,29 +33,32 @@ export class EdificioPage {
 
       )
 
-    EdificiosService.getBloques()
-      .subscribe(bloques => {
+    EdificiosService.getBloques(this.id)
+      .once('value')
+      .then(snapshot => {
+        var y = 0
+        for( var i in snapshot.val() ) {
 
-        this.bloques = bloques.filter(bloques.edificioId == this.id);
-
-
+          this.bloques[y] = snapshot.val()[i];
+          y += 1
+        }
       });
 
 
-    console.log(this.bloques)
+
+
+
+
 
 
 
 
   }goToBloque(params){
     if (!params) params = {};
-    this.navCtrl.push(BloquePage);
+    this.navCtrl.push(BloquePage, {id:params});
   }goToBloqueNuevo(params){
     if (!params) params = {};
     this.navCtrl.push(BloqueNuevoPage, {edificioId:params} );
   }
-  public  getBloquesF(val){
 
-    return val.edificioId == this.id;
-  }
 }

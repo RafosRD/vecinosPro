@@ -17,17 +17,27 @@
       </ion-label>
       <ion-select name=""></ion-select>
     </ion-item>
-    <ion-item color="none" on-click="goToSuplidor()" id="suplidoresDeServicios-list-item3">
+
+    <ion-item *ngFor="let suplidorp of suplidoresp" color="none" on-click="goToSuplidor(suplidorp.id)" id="suplidoresDeServicios-list-item3">
       <ion-thumbnail item-left>
         <img />
       </ion-thumbnail>
       <h2>
-        Electrisista
+        {{suplidorp.nombre}}
       </h2>
+      <ion-note item-bottom>
+        {{suplidorp.categoria}}<br/>
+        {{suplidorp.calificacion}}
+      </ion-note>
+      <ion-icon name="arrow-forward" item-right></ion-icon>
     </ion-item>
-    <ion-item color="none" on-click="goToSuplidor()" id="suplidoresDeServicios-list-item4">
-      Carpintero
-      <ion-note item-right></ion-note>
+    <ion-item *ngFor="let suplidor of suplidores" color="none" on-click="goToSuplidor(suplidor.id)" id="suplidoresDeServicios-list-item4">
+
+      {{suplidor.nombre}}
+      <ion-note item-right>
+        {{suplidor.categoria}}<br/>
+        {{suplidor.calificacion}}
+      </ion-note>
       <ion-icon name="arrow-forward" item-right></ion-icon>
     </ion-item>
   </ion-list>

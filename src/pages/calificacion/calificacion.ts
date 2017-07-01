@@ -8,6 +8,7 @@ import { NavController } from 'ionic-angular';
 export class CalificacionPage {
 
   constructor(public navCtrl: NavController) {
+
   }
-  
+
 }

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { QuejasPage } from '../quejas/quejas';
-// import { NuevaQuejaPage } from '../nueva-queja/nueva-queja';
-import { QuejaPage } from '../queja/queja';
+import { NavController, NavParams } from 'ionic-angular';
+import {QuejasService} from "../../services/quejas.service";
+import {EdificiosService} from "../../services/edificios.service";
+import {AngularFireAuth} from "angularfire2/auth/auth";
+import {PerfilesService} from "../../services/perfiles.service";
 
 @Component({
   selector: 'page-nueva-queja',
@@ -10,16 +11,62 @@ import { QuejaPage } from '../queja/queja';
 })
 export class NuevaQuejaPage {
 
-  constructor(public navCtrl: NavController) {
+  public queja = {id:null, titulo:null, descripcion:null, fecha:null, userId:null, edificioId:null, edificioNombre:null, userNombre:null,}
+  public edificios = []
+  public userId = null
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public QuejasService:QuejasService,
+              public EdificiosService:EdificiosService, public AngularFireAuth:AngularFireAuth, public PerfilesService:PerfilesService) {
+
+
+
+    this.AngularFireAuth.authState.subscribe(data =>
+      {
+        this.userId = data.uid;
+        EdificiosService.getEdificiosByAdminId(this.userId)
+          .once('value')
+          .then(snapshot => {
+
+            var y = 0
+            for( var i in snapshot.val() ) {
+
+              this.edificios[y] = snapshot.val()[i];
+              y += 1
+            }
+          });
+      }
+    );
+
   }
   goToQuejas(params){
+
+    this.EdificiosService.getEdificio(this.queja.edificioId)
+      .subscribe( edificio =>{
+
+          this.queja.edificioNombre = edificio.nombre;
+          this.queja.userId = this.userId;
+
+        this.PerfilesService.getPerfil(this.queja.userId)
+          .subscribe( usuario =>{
+
+              this.queja.userNombre = usuario.nombre;
+
+              this.QuejasService.createQueja(this.queja);
+
+            }
+
+          );
+
+
+
+        }
+
+      );
+
+
     if (!params) params = {};
-    this.navCtrl.push(QuejasPage);
-  }goToNuevaQueja(params){
-    if (!params) params = {};
-    this.navCtrl.push(NuevaQuejaPage);
-  }goToQueja(params){
-    if (!params) params = {};
-    this.navCtrl.push(QuejaPage);
+    this.navCtrl.pop();
   }
+
+
 }

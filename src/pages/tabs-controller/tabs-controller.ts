@@ -14,6 +14,7 @@ export class TabsControllerPage {
   tab2Root: any = AnunciosPage;
   tab3Root: any = SuplidoresDeServiciosPage;
   constructor(public navCtrl: NavController) {
+
   }
-  
+
 }

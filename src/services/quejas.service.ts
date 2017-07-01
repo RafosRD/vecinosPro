@@ -4,35 +4,33 @@ import {AngularFireAuth} from "angularfire2/auth/auth";
 import {PerfilesService} from "./perfiles.service";
 
 @Injectable()
-export class AnunciosService{
-  anuncios = []
+export class QuejasService{
+  quejas = []
   constructor(public afDB: AngularFireDatabase, public AngularFireAuth:AngularFireAuth, public PerfilesService:PerfilesService){
 
   }
-  public getAnuncios(){
-    return this.afDB.list('anuncios/')
+  public getQuejas(){
+    return this.afDB.list('quejas/')
   }
-  public getAnuncio(id){
-    return this.afDB.object('anuncios/'+id);
+  public getQueja(id){
+    return this.afDB.object('quejas/'+id);
   }
-  public createAnuncio(anuncio){
-    anuncio.id = this.afDB.database.ref().child('anuncios').push().key;
+  public createQueja(queja){
+    queja.id = this.afDB.database.ref().child('quejas').push().key;
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1; //January is 0!
     var yyyy = today.getFullYear();
     var todaystr = mm + '/' + dd + '/' + yyyy;
-    anuncio.fecha =  todaystr
-
-
-    this.afDB.database.ref('anuncios/'+anuncio.id).set(anuncio);
+    queja.fecha =  todaystr
+    this.afDB.database.ref('quejas/'+queja.id).set(queja);
   }
-  public editAnuncio(anuncio){
-    this.afDB.database.ref('anuncios/'+anuncio.id).set(anuncio);
+  public editQueja(queja){
+    this.afDB.database.ref('quejas/'+queja.id).set(queja);
   }
-  public deleteAnuncio(anuncio){
+  public deleteQueja(queja){
 
-    this.afDB.database.ref('anuncios/'+anuncio.id).remove(anuncio);
+    this.afDB.database.ref('quejas/'+queja.id).remove(queja);
   }
 
 }

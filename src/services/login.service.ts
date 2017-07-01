@@ -20,13 +20,9 @@ export class LoginService{
   public getPerfil(email){
     return this.afDB.object('perfiles/'+ email);
   }
-  public setLoginPerfil(user){
+  public logout(){
 
-  }
-  public getLoginPerfil(){
-
-  }
-  public logaut(){
+    this.auth.auth.signOut();
 
   }
 

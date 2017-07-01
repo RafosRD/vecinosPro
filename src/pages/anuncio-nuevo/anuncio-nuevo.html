@@ -10,10 +10,19 @@
 </ion-header>
 <ion-content padding id="page10">
     <ion-item id="anuncioNuevo-select3">
+
+
       <ion-label>
         Edificio
       </ion-label>
-      <ion-select name=""></ion-select>
+      <!--<ion-select [(ngModel)]="auncio.edificioId" [compareWith]="compareFn">-->
+        <ion-select [(ngModel)]="anuncio.edificioId">
+        <ion-option *ngFor="let edificio of edificios" [value]="edificio.id">
+          {{edificio.nombre}}
+        </ion-option>
+      </ion-select>
+
+
     </ion-item>
     <ion-item id="anuncioNuevo-input12">
       <ion-label></ion-label>
@@ -24,7 +33,6 @@
     <ion-item id="anuncioNuevo-input14">
       <ion-label></ion-label>
       <ion-input type="textarea" placeholder="Detalle" [(ngModel)]="anuncio.descripcion">
-
       </ion-input>
     </ion-item>
   <button id="anuncioNuevo-button7" ion-button color="positive" block on-click="goToAnuncios()">

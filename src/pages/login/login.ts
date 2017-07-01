@@ -4,6 +4,7 @@ import { RegistrarsePage } from '../registrarse/registrarse';
 import { AnunciosPage } from '../anuncios/anuncios';
 import {LoginService} from "../../services/login.service";
 import {AngularFireAuth} from "angularfire2/auth"
+import {TabsControllerPage} from '../tabs-controller/tabs-controller';
 
 
 
@@ -54,7 +55,10 @@ export class LoginPage {
 
     this.LoginService.login(this.user).then( authData => {
       this.loading.dismiss().then( () => {
-        this.navCtrl.setRoot(AnunciosPage);
+
+        this.navCtrl.setRoot(TabsControllerPage);
+
+
       });
     }, error => {
       this.loading.dismiss().then( () => {

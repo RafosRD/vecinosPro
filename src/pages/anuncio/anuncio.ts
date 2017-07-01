@@ -8,7 +8,7 @@ import {AnunciosService} from "../../services/anuncios.service";
   templateUrl: 'anuncio.html'
 })
 export class AnuncioPage {
-  anuncio = {id:null, titulo:null, descripcion:null}
+  anuncio = {id:null, titulo:null, descripcion:null, fecha:null, userId:null, edificioId:null, edificioNombre:null}
   id = null;
 
   constructor(public navCtrl: NavController, public navParams:NavParams, public  AnunciosService: AnunciosService) {
@@ -18,7 +18,7 @@ export class AnuncioPage {
           this.anuncio = anuncio;
         }
 
-      )
+      );
 
   }
 

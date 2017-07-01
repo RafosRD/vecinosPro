@@ -9,30 +9,42 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page17">
-  <form id="pagoNuevo-form7">
+
     <ion-item id="pagoNuevo-select5">
       <ion-label>
         Edificio
       </ion-label>
-      <ion-select name=""></ion-select>
+      <ion-select [(ngModel)]="pago.edificioId">
+        <ion-option *ngFor="let edificio of edificios" [value]="edificio.id">
+          {{edificio.nombre}}
+        </ion-option>
+      </ion-select>
     </ion-item>
     <ion-item id="pagoNuevo-input19">
       <ion-label></ion-label>
-      <ion-input type="number" placeholder="Monto"></ion-input>
+      <ion-input type="number" placeholder="Monto" [(ngModel)]="pago.monto"></ion-input>
+    </ion-item>
+    <ion-item id="pagoNuevo-input19">
+      <ion-label></ion-label>
+      <ion-input type="text" placeholder="Nombre en la tarjeta" [(ngModel)]="pago.NombreTarjeta"></ion-input>
     </ion-item>
     <ion-item id="pagoNuevo-input21">
       <ion-label></ion-label>
-      <ion-input type="text" placeholder="Numero de tarjeta"></ion-input>
+      <ion-input type="text" placeholder="Numero de tarjeta" [(ngModel)]="pago.tarjetaNumero"></ion-input>
     </ion-item>
     <ion-item id="pagoNuevo-input22">
       <ion-label></ion-label>
-      <ion-input type="number" placeholder="CVV"></ion-input>
+      <ion-input type="number" placeholder="CVV" [(ngModel)]="pago.cvv"></ion-input>
     </ion-item>
     <ion-item id="pagoNuevo-input23">
       <ion-label></ion-label>
-      <ion-input type="text" placeholder="Fecha de venciomiento"></ion-input>
+      <ion-input type="text" placeholder="Fecha de venciomiento" [(ngModel)]="pago.fechaTarjeta"></ion-input>
     </ion-item>
-  </form>
+  <ion-item id="pagoNuevo-agregado1">
+    <ion-label></ion-label>
+    <ion-input type="text" placeholder="Comentario" [(ngModel)]="pago.comentario"></ion-input>
+  </ion-item>
+
   <button id="pagoNuevo-button14" ion-button color="positive" block on-click="goToTransacciones()">
     Guardar
   </button>

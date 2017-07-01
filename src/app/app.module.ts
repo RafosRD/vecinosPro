@@ -32,6 +32,13 @@ import {AnunciosService} from "../services/anuncios.service";
 import {PerfilesService} from "../services/perfiles.service";
 import {LoginService} from "../services/login.service";
 import {EdificiosService} from "../services/edificios.service";
+import {TransaccionesService} from "../services/transacciones.service";
+import {PagosService} from "../services/pagos.service";
+import {QuejasService} from "../services/quejas.service";
+import {SuplidoresService} from "../services/suplidores.service";
+
+
+
 
 
 
@@ -135,6 +142,10 @@ export const firebaseConfig = {
     PerfilesService,
     LoginService,
     EdificiosService,
+    TransaccionesService,
+    PagosService,
+    QuejasService,
+    SuplidoresService,
 
   ]
 })

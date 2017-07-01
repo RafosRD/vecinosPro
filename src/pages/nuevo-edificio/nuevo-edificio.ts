@@ -22,7 +22,6 @@ export class NuevoEdificioPage {
     this.AngularFireAuth.authState.subscribe(data =>
       {
         this.edificio.adminId = data.uid;
-        this.edificio.id = Date.now();
         this.EdificiosService.createEdificios(this.edificio);
       }
     );

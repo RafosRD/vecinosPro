@@ -20,7 +20,6 @@ export class BloqueNuevoPage {
   goToEdificio(params){
 
     this.bloque.edificioId = this.navParams.get('edificioId')
-    this.bloque.id = Date.now();
     this.EdificiosService.createBloque(this.bloque);
 
     if (!params) params = {};

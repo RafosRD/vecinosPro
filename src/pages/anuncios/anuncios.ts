@@ -29,11 +29,6 @@ export class AnunciosPage {
   }goToAnuncioNuevo(params){
     if (!params) params = {};
     this.navCtrl.push(AnuncioNuevoPage, {id:0});
-  // }goToAnuncios(params){
-  //   if (!params) params = {};
-  //   this.navCtrl.push(AnunciosPage);
- // }createAnuncio(params){
- //  if (!params) params = {};
- //  this.navCtrl.push(AnuncioPage, {id:params});
  }
+
 }

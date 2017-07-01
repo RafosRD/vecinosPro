@@ -1,11 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { PagoPage } from '../pago/pago';
 import { PagoNuevoPage } from '../pago-nuevo/pago-nuevo';
-// import { TransaccionesPage } from '../transacciones/transacciones';
-import { TransacciNNuevaPage } from '../transacci-nnueva/transacci-nnueva';
-import { TransaccionesPage } from '../transacciones/transacciones';
-import { TransaccionPage } from '../transaccion/transaccion';
+import {PagosService} from "../../services/pagos.service";
 
 @Component({
   selector: 'page-pagos',
@@ -13,25 +10,24 @@ import { TransaccionPage } from '../transaccion/transaccion';
 })
 export class PagosPage {
 
-  constructor(public navCtrl: NavController) {
+  pagos = []
+
+  @ViewChild('myNav') nav:NavController;
+  constructor(public navCtrl: NavController, PagosService:PagosService) {
+    PagosService.getPagos()
+      .subscribe(pagos => {
+        this.pagos = pagos;
+      });
+
+
   }
   goToPago(params){
     if (!params) params = {};
-    this.navCtrl.push(PagoPage);
+    this.navCtrl.push(PagoPage, {id:params});
+
   }goToPagoNuevo(params){
     if (!params) params = {};
     this.navCtrl.push(PagoNuevoPage);
-  // }goToTransacciones(params){
-  //   if (!params) params = {};
-  //   this.navCtrl.push(TransaccionesPage);
-  }goToTransacciNNueva(params){
-    if (!params) params = {};
-    this.navCtrl.push(TransacciNNuevaPage);
-  }goToTransacciones(params){
-    if (!params) params = {};
-    this.navCtrl.push(TransaccionesPage);
-  }goToTransaccion(params){
-    if (!params) params = {};
-    this.navCtrl.push(TransaccionPage);
+
   }
 }

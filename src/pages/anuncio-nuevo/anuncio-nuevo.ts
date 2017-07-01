@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {AnunciosService} from "../../services/anuncios.service";
+import {EdificiosService} from "../../services/edificios.service";
+import {AngularFireAuth} from "angularfire2/auth/auth";
 
 
 @Component({
@@ -8,17 +10,49 @@ import {AnunciosService} from "../../services/anuncios.service";
   templateUrl: 'anuncio-nuevo.html'
 })
 export class AnuncioNuevoPage {
-  anuncio = {id:null, titulo:null, descripcion:null}
+  public anuncio = {id:null, titulo:null, descripcion:null, fecha:null, userId:null, edificioId:null, edificioNombre:null}
+  public edificios = []
+  public userId = null
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public AnunciosService:AnunciosService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public AnunciosService:AnunciosService,
+              public EdificiosService:EdificiosService, public AngularFireAuth:AngularFireAuth) {
 
 
+
+    this.AngularFireAuth.authState.subscribe(data =>
+      {
+        this.userId = data.uid;
+        EdificiosService.getEdificiosByAdminId(this.userId)
+          .once('value')
+          .then(snapshot => {
+
+            var y = 0
+            for( var i in snapshot.val() ) {
+
+              this.edificios[y] = snapshot.val()[i];
+              y += 1
+            }
+          });
+      }
+    );
 
   }
   goToAnuncios(params){
-    this.anuncio.id = Date.now()
-    this.AnunciosService.createAnuncio(this.anuncio);
-    this.navCtrl.pop();
+
+    this.EdificiosService.getEdificio(this.anuncio.edificioId)
+      .subscribe( edificio =>{
+
+        this.anuncio.edificioNombre = edificio.nombre;
+        this.anuncio.userId = this.userId;
+        this.AnunciosService.createAnuncio(this.anuncio);
+
+        console.log(edificio.nombre)
+
+        }
+
+      );
+      this.navCtrl.pop();
+
     // if (!params) params = {};
     // this.navCtrl.push(AnunciosPage);
   }

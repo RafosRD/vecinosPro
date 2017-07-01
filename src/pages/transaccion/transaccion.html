@@ -10,26 +10,28 @@
 </ion-header>
 <ion-content padding id="page7">
   <h1 id="transaccion-heading1" style="color:#000000;">
-    Pago x
+    {{transaccion.titulo}}
   </h1>
   <div id="transaccion-markdown1" class="show-list-numbers-and-dots">
     <p style="color:#000000;">
-      Yamila 1
+      {{transaccion.edificioN}}
     </p>
   </div>
   <div id="transaccion-markdown10" class="show-list-numbers-and-dots">
     <p style="color:#000000;">
-      $8000
+      {{transaccion.fecha}}
     </p>
   </div>
   <div id="transaccion-markdown3" class="show-list-numbers-and-dots">
     <p style="color:#000000;">
-      0/0/0
+
+      ${{transaccion.monto}}
+
     </p>
   </div>
   <div id="transaccion-markdown2" class="show-list-numbers-and-dots">
     <p style="color:#000000;">
-      pago por el agua
+      {{transaccion.descripcion}}
     </p>
   </div>
 </ion-content>

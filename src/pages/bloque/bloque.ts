@@ -1,16 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { PerfilPage } from '../perfil/perfil';
-import { RegistrarsePage } from '../registrarse/registrarse';
-import { LoginPage } from '../login/login';
-// import { RegistrarsePage } from '../registrarse/registrarse';
-import { AnunciosPage } from '../anuncios/anuncios';
-import { AnuncioPage } from '../anuncio/anuncio';
-import { AnuncioNuevoPage } from '../anuncio-nuevo/anuncio-nuevo';
-// import { AnunciosPage } from '../anuncios/anuncios';
 import { PerfilesPage } from '../perfiles/perfiles';
-// import { BloquePage } from '../bloque/bloque';
-// import { PerfilPage } from '../perfil/perfil';
+import {EdificiosService} from "../../services/edificios.service";
+import {PerfilesService} from "../../services/perfiles.service";
 
 @Component({
   selector: 'page-bloque',
@@ -18,40 +11,56 @@ import { PerfilesPage } from '../perfiles/perfiles';
 })
 export class BloquePage {
 
-  constructor(public navCtrl: NavController) {
+  id = null
+  bloque  = {id:null, edificioId:null, nombre:null}
+  perfiles = []
+
+  constructor(public navCtrl: NavController, public navParams:NavParams, public EdificiosService:EdificiosService, public PerfilesService:PerfilesService) {
+
+
+    this.id = navParams.get('id')
+    EdificiosService.getBloque(this.id)
+      .subscribe( bloque =>{
+          this.bloque = bloque;
+        }
+
+      )
+
+
+    EdificiosService.getPerfilesBloques(this.id)
+      .once('value')
+      .then(snapshot => {
+        var y = 0
+        for( var i in snapshot.val() ) {
+
+          this.id = navParams.get('id')
+          PerfilesService.getPerfil(snapshot.val()[i].perfilId)
+            .subscribe( perfil =>{
+              this.perfiles[y] = perfil;
+              y++
+              }
+
+            )
+
+
+        }
+
+      });
+
+
+
+
+
+
   }
   goToPerfil(params){
     if (!params) params = {};
-    this.navCtrl.push(PerfilPage);
-  }goToRegistrarse(params){
+
+    this.navCtrl.push(PerfilPage, {id:params});
+
+  }goToPerfiles(params){
     if (!params) params = {};
-    this.navCtrl.push(RegistrarsePage);
-  }goToLogin(params){
-    if (!params) params = {};
-    this.navCtrl.push(LoginPage);
-  // }goToRegistrarse(params){
-  //   if (!params) params = {};
-  //   this.navCtrl.push(RegistrarsePage);
-  }goToAnuncios(params){
-    if (!params) params = {};
-    this.navCtrl.push(AnunciosPage);
-  }goToAnuncio(params){
-    if (!params) params = {};
-    this.navCtrl.push(AnuncioPage);
-  }goToAnuncioNuevo(params){
-    if (!params) params = {};
-    this.navCtrl.push(AnuncioNuevoPage);
-  // }goToAnuncios(params){
-  //   if (!params) params = {};
-  //   this.navCtrl.push(AnunciosPage);
-  // }goToPerfiles(params){
-  //   if (!params) params = {};
-  //   this.navCtrl.push(PerfilesPage);
-  }goToBloque(params){
-    if (!params) params = {};
-    this.navCtrl.push(BloquePage);
-  // }goToPerfil(params){
-  //   if (!params) params = {};
-  //   this.navCtrl.push(PerfilPage);
+    this.navCtrl.push(PerfilesPage, {bloqueId:params});
+
   }
 }

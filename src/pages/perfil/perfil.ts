@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { RegistrarsePage } from '../registrarse/registrarse';
 import {PerfilesService} from "../../services/perfiles.service";
 import {AngularFireAuth} from "angularfire2/auth"
@@ -14,19 +14,38 @@ export class PerfilPage {
   perfil = {id:null, nombre:null, telefono:null, profesion:null, email:null, password:null}
   id = null
 
-  constructor(public navCtrl: NavController, public PerfilesService: PerfilesService, AngularFireAuth: AngularFireAuth) {
+  constructor(public navCtrl: NavController,  public navParams:NavParams, public PerfilesService: PerfilesService, AngularFireAuth: AngularFireAuth) {
 
 
-    AngularFireAuth.authState.subscribe(data =>
-      {
-        PerfilesService.getPerfil(data.uid)
-          .subscribe( anuncio =>{
-              this.perfil = anuncio;
+
+      if(typeof navParams.get('id') != 'string' ){
+        console.log('hola que hace')
+        AngularFireAuth.authState.subscribe(data =>
+          {
+
+            this.id = data.uid;
+            PerfilesService.getPerfil(this.id)
+              .subscribe( perfil =>{
+                  this.perfil = perfil;
+                }
+
+              )
+
+          }
+        );
+
+      }else{
+
+        this.id = navParams.get('id');
+        PerfilesService.getPerfil(this.id)
+          .subscribe( perfil =>{
+              this.perfil = perfil;
             }
 
           )
+
       }
-    );
+
 
 
 

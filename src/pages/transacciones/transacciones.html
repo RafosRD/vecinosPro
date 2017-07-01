@@ -10,9 +10,14 @@
 </ion-header>
 <ion-content padding id="page2">
   <ion-list id="transacciones-list3">
-    <ion-item color="none" on-click="goToTransaccion()" id="transacciones-list-item1">
-      Pago x
-      <ion-note item-right></ion-note>
+    <ion-item *ngFor="let transaccion of transacciones" color="none" on-click="goToTransaccion(transaccion.id)" id="transacciones-list-item1">
+      {{transaccion.titulo}}
+      <ion-note item-right>
+        {{transaccion.edificioN}}<br/>
+        {{transaccion.fecha}} <br/>
+        ${{transaccion.monto}}
+
+      </ion-note>
       <ion-icon name="arrow-forward" item-right></ion-icon>
     </ion-item>
   </ion-list>

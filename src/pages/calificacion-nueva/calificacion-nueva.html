@@ -12,18 +12,18 @@
   <form id="calificacionNueva-form6">
     <ion-item id="calificacionNueva-input15">
       <ion-label></ion-label>
-      <ion-input type="text" placeholder="Titulo"></ion-input>
+      <ion-input type="text" placeholder="Titulo" [(ngModel)]="calificacion.titulo"></ion-input>
     </ion-item>
     <ion-item id="calificacionNueva-input16">
       <ion-label></ion-label>
-      <ion-input type="number" placeholder="Calificacion"></ion-input>
+      <ion-input type="number" placeholder="Calificacion" [(ngModel)]="calificacion.calificacion"></ion-input>
     </ion-item>
     <ion-item id="calificacionNueva-input17">
       <ion-label></ion-label>
-      <ion-input type="text" placeholder="Detalle"></ion-input>
+      <ion-input type="text" placeholder="Detalle" [(ngModel)]="calificacion.detalle"></ion-input>
     </ion-item>
   </form>
-  <button id="calificacionNueva-button8" ion-button color="positive" block on-click="goToTransacciones()">
+  <button id="calificacionNueva-button8" ion-button color="positive" block on-click="goToSuplidor()">
     Guardar
   </button>
 </ion-content>

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NuevaQuejaPage } from '../nueva-queja/nueva-queja';
-// import { QuejasPage } from '../quejas/quejas';
 import { QuejaPage } from '../queja/queja';
+import {QuejasService} from "../../services/quejas.service";
 
 @Component({
   selector: 'page-quejas',
@@ -10,16 +10,24 @@ import { QuejaPage } from '../queja/queja';
 })
 export class QuejasPage {
 
-  constructor(public navCtrl: NavController) {
+
+  quejas = []
+
+  @ViewChild('myNav') nav:NavController;
+  constructor(public navCtrl: NavController, QuejasService:QuejasService) {
+    QuejasService.getQuejas()
+      .subscribe(quejas => {
+        this.quejas = quejas;
+      });
+
   }
   goToNuevaQueja(params){
     if (!params) params = {};
     this.navCtrl.push(NuevaQuejaPage);
-  }goToQuejas(params){
-    if (!params) params = {};
-    this.navCtrl.push(QuejasPage);
+
+
   }goToQueja(params){
     if (!params) params = {};
-    this.navCtrl.push(QuejaPage);
+    this.navCtrl.push(QuejaPage , {id:params});
   }
 }
