@@ -23,6 +23,6 @@ export class BloqueNuevoPage {
     this.EdificiosService.createBloque(this.bloque);
 
     if (!params) params = {};
-    this.navCtrl.pop();
+    this.navCtrl.goToRoot(this.navCtrl.pop) ;
   }
 }

@@ -32,5 +32,15 @@ export class QuejasService{
 
     this.afDB.database.ref('quejas/'+queja.id).remove(queja);
   }
+  public getQuejasByEdificioId(edificioId){
+    return this.afDB.database.ref('quejas/').orderByChild('edificioId').equalTo(edificioId);
+
+  }
+
+  public getQuejasByUserId(userId){
+    return this.afDB.database.ref('quejas/').orderByChild('userId').equalTo(userId);
+
+  }
+
 
 }

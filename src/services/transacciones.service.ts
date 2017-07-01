@@ -2,11 +2,16 @@ import {Injectable} from '@angular/core';
 import {AngularFireDatabase} from "angularfire2/database/database";
 import {AngularFireAuth} from "angularfire2/auth/auth";
 import {PerfilesService} from "./perfiles.service";
+import {EdificiosService} from "./edificios.service";
 
 @Injectable()
 export class TransaccionesService{
-  transacciones = []
-  constructor(public afDB: AngularFireDatabase, public AngularFireAuth:AngularFireAuth, public PerfilesService:PerfilesService){
+  public transacciones = [];
+  public perfilbloques = [];
+  public userId = false;
+
+  constructor(public afDB: AngularFireDatabase, public AngularFireAuth:AngularFireAuth, public PerfilesService:PerfilesService
+    , public EdificiosService:EdificiosService){
 
   }
   public getTransacciones(){
@@ -34,5 +39,15 @@ export class TransaccionesService{
 
     this.afDB.database.ref('transacciones/'+ transaccion.id).remove(transaccion);
   }
+  public getTransaccionesByEdificioId(edificioId){
+    return this.afDB.database.ref('transacciones/').orderByChild('edificioId').equalTo(edificioId);
+
+  }
+
+  public getTransaccionesByUserId(userId){
+    return this.afDB.database.ref('transacciones/').orderByChild('userId').equalTo(userId);
+
+  }
+
 
 }

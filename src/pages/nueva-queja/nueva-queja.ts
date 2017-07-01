@@ -20,22 +20,42 @@ export class NuevaQuejaPage {
 
 
 
-    this.AngularFireAuth.authState.subscribe(data =>
-      {
-        this.userId = data.uid;
-        EdificiosService.getEdificiosByAdminId(this.userId)
-          .once('value')
-          .then(snapshot => {
+    // this.AngularFireAuth.authState.subscribe(data =>
+    //   {
+    //     this.userId = data.uid;
+    //     EdificiosService.getEdificiosByAdminId(this.userId)
+    //       .once('value')
+    //       .then(snapshot => {
+    //
+    //         var y = 0
+    //         for( var i in snapshot.val() ) {
+    //
+    //           this.edificios[y] = snapshot.val()[i];
+    //           y += 1
+    //         }
+    //       });
+    //   }
+    // );
 
-            var y = 0
-            for( var i in snapshot.val() ) {
+      this.AngularFireAuth.authState.subscribe(data =>
+          {
+              this.userId = data.uid;
+              var y = 0
+              this.EdificiosService.getPerfilesEdificiosByPerfilId(this.userId)
+                  .once('value')
+                  .then(snapshot => {
+                      for( var i in snapshot.val() ) {
+                          this.EdificiosService.getEdificio(snapshot.val()[i].edificioId)
+                              .subscribe( edificio =>{
+                                  this.edificios[y] = edificio;
+                                  y++
+                              })
 
-              this.edificios[y] = snapshot.val()[i];
-              y += 1
-            }
-          });
-      }
-    );
+                      }
+
+                  });
+          }
+      );
 
   }
   goToQuejas(params){
@@ -65,7 +85,7 @@ export class NuevaQuejaPage {
 
 
     if (!params) params = {};
-    this.navCtrl.pop();
+    this.navCtrl.popToRoot(this.navCtrl.getActive().component);
   }
 
 

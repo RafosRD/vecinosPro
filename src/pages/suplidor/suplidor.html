@@ -37,17 +37,17 @@
 
 
       <ion-icon *ngIf="calificacion.calificacion > 3" name="thumbs-up" item-left></ion-icon>
-      <!--<ion-icon *ngIf="calificacion.calificacion = 3" name="thumbs-up" item-left></ion-icon>-->
-      <!--<ion-icon *ngIf="calificacion.calificacion < 3" name="thumbs-up" item-left></ion-icon>-->
+      <!--<ion-icon *ngIf="calificacion.calificacion = 3" name="git-commit" item-left></ion-icon>-->
+      <ion-icon *ngIf="calificacion.calificacion < 3" name="thumbs-down" item-left></ion-icon>
         {{calificacion.titulo}}
       <ion-note item-right>
-        {{cailificacion.calificacion}}
+        {{calificacion.calificacion}}
       </ion-note>
       <ion-icon name="arrow-forward" item-right></ion-icon>
     </ion-item>
   </ion-list>
 
-  <button id="suplidor-button9" ion-button color="positive" block on-click="goToCalificacionNueva()">
+  <button id="suplidor-button9" ion-button color="positive" block on-click="goToCalificacionNueva(suplidor.id)">
     Calificar
   </button>
 </ion-content>

@@ -34,5 +34,14 @@ export class AnunciosService{
 
     this.afDB.database.ref('anuncios/'+anuncio.id).remove(anuncio);
   }
+  public getAnunciosByEdificioId(edificioId){
+    return this.afDB.database.ref('anuncios/').orderByChild('edificioId').equalTo(edificioId);
+
+  }
+
+  public getAnunciosByUserId(userId){
+    return this.afDB.database.ref('anuncios/').orderByChild('userId').equalTo(userId);
+
+  }
 
 }

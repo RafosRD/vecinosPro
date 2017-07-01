@@ -27,7 +27,7 @@ export class BloquePage {
       )
 
 
-    EdificiosService.getPerfilesBloques(this.id)
+    EdificiosService.getPerfilesBloquesByBloqueId(this.id)
       .once('value')
       .then(snapshot => {
         var y = 0

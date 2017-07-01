@@ -35,4 +35,14 @@ export class PagosService{
     this.afDB.database.ref('pagos/'+pago.id).remove(pago);
   }
 
+  public getPagosByEdificioId(edificioId){
+    return this.afDB.database.ref('pagos/').orderByChild('edificioId').equalTo(edificioId);
+
+  }
+
+  public getPagosByUserId(userId){
+    return this.afDB.database.ref('pagos/').orderByChild('userId').equalTo(userId);
+
+  }
+
 }

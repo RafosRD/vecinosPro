@@ -19,7 +19,6 @@ export class PerfilPage {
 
 
       if(typeof navParams.get('id') != 'string' ){
-        console.log('hola que hace')
         AngularFireAuth.authState.subscribe(data =>
           {
 

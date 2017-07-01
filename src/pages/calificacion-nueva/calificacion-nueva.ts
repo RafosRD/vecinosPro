@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {SuplidoresService} from "../../services/suplidores.service";
 import {AngularFireAuth} from "angularfire2/auth/auth";
+import {SuplidorPage} from "../../pages/suplidor/suplidor"
 
 
 @Component({
@@ -18,7 +19,7 @@ export class CalificacionNuevaPage {
 
   }
 
-  goSuplidor(params){
+  goToSuplidor(params){
 
     this.AngularFireAuth.authState.subscribe(data =>
       {
@@ -28,6 +29,7 @@ export class CalificacionNuevaPage {
     this.calificacion.suplidorId = this.navParams.get('suplidorId')
     this.SuplidoresService.createCalificacion(this.calificacion);
     if (!params) params = {};
-    this.navCtrl.pop();
+    this.navCtrl.pop() ;
+    this.navCtrl.setRoot(SuplidorPage)
   }
 }

@@ -5,6 +5,8 @@ import {AngularFireDatabase} from "angularfire2/database/database";
 export class EdificiosService{
 
   perfilBloque = {id:null, perfilId:null, bloqueId:null};
+  perfilEdificio = {id:null, perfilId:null, edificioId:null};
+  bloque = null;
 
 
   constructor(public afDB: AngularFireDatabase){
@@ -33,6 +35,8 @@ export class EdificiosService{
 
   }
 
+
+
   //BLOQUES
 
   public getBloques(edificioId){
@@ -50,16 +54,35 @@ export class EdificiosService{
 
   public addPerfilToBloque(perfilId,bloqueId){
 
+
+
     this.perfilBloque.id = this.afDB.database.ref().child('perfilBloque').push().key
     this.perfilBloque.perfilId = perfilId
     this.perfilBloque.bloqueId = bloqueId
 
+    this.getBloque(bloqueId)
+      .subscribe( bloque =>{
+          this.bloque = bloque;
+        }
+
+      )
+    this.perfilEdificio.id = this.afDB.database.ref().child('perfilEdificio').push().key
+    this.perfilEdificio.perfilId = perfilId
+    this.perfilEdificio.edificioId = this.bloque.edificioId
 
     this.afDB.database.ref('perfilBloque/'+this.perfilBloque.id).set(this.perfilBloque);
+    this.afDB.database.ref('perfilEdificio/'+this.perfilEdificio.id).set(this.perfilEdificio);
+
 
   }
 
-  public getPerfilesBloques(bloqueId){
-    return this.afDB.database.ref('perfilBloque/').orderByChild('bloqueId').equalTo(bloqueId)
+  public getPerfilesBloquesByBloqueId(bloqueId){
+    return this.afDB.database.ref('perfilBloque/').orderByChild('bloqueId').equalTo(bloqueId);
   }
+
+  public getPerfilesEdificiosByPerfilId(perfilId){
+    return this.afDB.database.ref('perfilEdificio/').orderByChild('perfilId').equalTo(perfilId);
+  }
+
+
 }

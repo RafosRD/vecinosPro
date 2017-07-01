@@ -33,6 +33,8 @@ export class PerfilesPage {
 
     this.EdificiosService.addPerfilToBloque(params,this.bloqueId)
     this.navCtrl.pop();
+    this.navCtrl.setRoot(BloquePage)
+
 
   }
 

@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import {TransaccionesService} from "../../services/transacciones.service";
 import {EdificiosService} from "../../services/edificios.service";
 import {AngularFireAuth} from "angularfire2/auth/auth";
+import {TransaccionesPage} from "../../pages/transacciones/transacciones"
 
 
 @Component({
@@ -45,8 +46,8 @@ export class TransacciNNuevaPage {
 
     this.EdificiosService.getEdificio(this.transaccion.edificioId)
       .subscribe( edificio =>{
-        this.transaccion.edificioN = edificio.nombre;
 
+        this.transaccion.edificioN = edificio.nombre;
         this.transaccion.userId = this.userId;
         if (!params) params = {};
         this.TransaccionesService.createTransaccion(this.transaccion);
@@ -55,8 +56,8 @@ export class TransacciNNuevaPage {
 
       );
 
-    this.navCtrl.pop();
-
+    this.navCtrl.pop()
+      this.navCtrl.setRoot(TransaccionesPage)
 
 
   }

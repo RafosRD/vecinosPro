@@ -27,7 +27,7 @@ export class RegistrarsePage {
     this.LoginService.registrar(this.perfil,this.user)
       .then(() => {
         this.loading.dismiss().then( () => {
-          this.navCtrl.pop();
+          this.navCtrl.pop() ;
         });
       }, (error) => {
         this.loading.dismiss().then( () => {

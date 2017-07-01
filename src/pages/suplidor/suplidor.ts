@@ -40,7 +40,7 @@ export class SuplidorPage {
   }
   goToCalificacionNueva(params){
     if (!params) params = {};
-    this.navCtrl.push(CalificacionNuevaPage);
+    this.navCtrl.push(CalificacionNuevaPage, {suplidorId:params});
 
   }goToCalificacion(params){
 

@@ -9,20 +9,26 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page13">
-  <form id="calificacionNueva-form6">
     <ion-item id="calificacionNueva-input15">
       <ion-label></ion-label>
       <ion-input type="text" placeholder="Titulo" [(ngModel)]="calificacion.titulo"></ion-input>
     </ion-item>
     <ion-item id="calificacionNueva-input16">
-      <ion-label></ion-label>
-      <ion-input type="number" placeholder="Calificacion" [(ngModel)]="calificacion.calificacion"></ion-input>
+      <ion-label>
+        Calificacion
+      </ion-label>
+      <ion-select [(ngModel)]="calificacion.calificacion">
+        <ion-option>1</ion-option>
+        <ion-option>2</ion-option>
+        <ion-option>3</ion-option>
+        <ion-option>4</ion-option>
+        <ion-option>5</ion-option>
+      </ion-select>
     </ion-item>
     <ion-item id="calificacionNueva-input17">
       <ion-label></ion-label>
       <ion-input type="text" placeholder="Detalle" [(ngModel)]="calificacion.detalle"></ion-input>
     </ion-item>
-  </form>
   <button id="calificacionNueva-button8" ion-button color="positive" block on-click="goToSuplidor()">
     Guardar
   </button>

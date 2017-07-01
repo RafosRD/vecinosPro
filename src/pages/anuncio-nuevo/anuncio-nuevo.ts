@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import {AnunciosService} from "../../services/anuncios.service";
 import {EdificiosService} from "../../services/edificios.service";
 import {AngularFireAuth} from "angularfire2/auth/auth";
+import {AnunciosPage} from "../../pages/anuncios/anuncios"
 
 
 @Component({
@@ -46,14 +47,13 @@ export class AnuncioNuevoPage {
         this.anuncio.userId = this.userId;
         this.AnunciosService.createAnuncio(this.anuncio);
 
-        console.log(edificio.nombre)
-
         }
 
       );
-      this.navCtrl.pop();
+
+      this.navCtrl.pop()
+      this.navCtrl.setRoot(AnunciosPage);
 
     // if (!params) params = {};
-    // this.navCtrl.push(AnunciosPage);
   }
 }

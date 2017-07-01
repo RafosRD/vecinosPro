@@ -27,7 +27,8 @@ export class NuevoEdificioPage {
     );
 
     if (!params) params = {};
-    this.navCtrl.pop();
+    this.navCtrl.pop() ;
+    this.navCtrl.setRoot(EdificiosPage)
 
   }
 }
