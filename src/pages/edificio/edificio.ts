@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, Events} from 'ionic-angular';
 import { BloquePage } from '../bloque/bloque';
 import { BloqueNuevoPage } from '../bloque-nuevo/bloque-nuevo';
 import {EdificiosService} from "../../services/edificios.service";
@@ -13,11 +13,12 @@ import {PerfilesService} from "../../services/perfiles.service";
 export class EdificioPage {
 
   edificio = {id:null, adminId:null, nombre:null};
-  admin = {nombre:null}
+  admin_nombre = null;
   public id=null;
   public bloques = [];
 
-  constructor(public navCtrl: NavController, public navParams:NavParams, EdificiosService:EdificiosService, PerfilesService:PerfilesService) {
+  constructor(public navCtrl: NavController, public navParams:NavParams, public EdificiosService:EdificiosService,
+              PerfilesService:PerfilesService, public events:Events) {
 
     this.id = navParams.get('id')
     EdificiosService.getEdificio(this.id)
@@ -26,22 +27,18 @@ export class EdificioPage {
         }
 
       )
+
     PerfilesService.getPerfil(this.edificio.adminId)
       .subscribe( perfil =>{
-          this.admin = perfil;
+          this.admin_nombre = perfil.nombre;
         }
 
       )
 
-    EdificiosService.getBloques(this.id)
-      .once('value')
-      .then(snapshot => {
-        var y = 0
-        for( var i in snapshot.val() ) {
+      this.reloadList();
 
-          this.bloques[y] = snapshot.val()[i];
-          y += 1
-        }
+      this.events.subscribe('reloadList',() => {
+          this.reloadList()
       });
 
 
@@ -58,7 +55,21 @@ export class EdificioPage {
     this.navCtrl.push(BloquePage, {id:params});
   }goToBloqueNuevo(params){
     if (!params) params = {};
-    this.navCtrl.push(BloqueNuevoPage, {edificioId:params} );
+    this.navCtrl.push(BloqueNuevoPage, {edificioId:params, "parentPage": this });
   }
+  public reloadList(){
+
+    this.EdificiosService.getBloques(this.id)
+        .once('value')
+        .then(snapshot => {
+            var y = 0
+            for( var i in snapshot.val() ) {
+
+                this.bloques[y] = snapshot.val()[i];
+                y += 1
+            }
+        });
+
+    }
 
 }

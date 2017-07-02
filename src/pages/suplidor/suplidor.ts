@@ -17,34 +17,39 @@ export class SuplidorPage {
 
   constructor(public navCtrl: NavController, public SuplidoresService:SuplidoresService , public navParams:NavParams) {
 
-    this.id = navParams.get('id')
-    SuplidoresService.getSuplidor(this.id)
-      .subscribe( suplidor =>{
-          this.suplidor = suplidor;
-        }
-
-      )
-
-    SuplidoresService.getCalificaciones(this.id)
-      .once('value')
-      .then(snapshot => {
-        var y = 0
-        for( var i in snapshot.val() ) {
-
-          this.calificaciones[y] = snapshot.val()[i];
-          y += 1
-        }
-      });
-
+      this.reloadList();
 
   }
   goToCalificacionNueva(params){
     if (!params) params = {};
-    this.navCtrl.push(CalificacionNuevaPage, {suplidorId:params});
+    this.navCtrl.push(CalificacionNuevaPage, {suplidor:params,"parentPage":this});
 
   }goToCalificacion(params){
 
     if (!params) params = {};
-    this.navCtrl.push(CalificacionPage);
+    this.navCtrl.push(CalificacionPage,{id:params});
+  }
+  public reloadList() {
+    this.id = this.navParams.get('id')
+    this.SuplidoresService.getSuplidor(this.id)
+        .subscribe( suplidor =>{
+              this.suplidor = suplidor;
+            }
+
+        )
+
+    this.SuplidoresService.getCalificaciones(this.id)
+        .once('value')
+        .then(snapshot => {
+          var y = 0
+          for( var i in snapshot.val() ) {
+
+            this.calificaciones[y] = snapshot.val()[i];
+            y += 1
+          }
+        });
+
+
+
   }
 }

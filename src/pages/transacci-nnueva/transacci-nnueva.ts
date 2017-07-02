@@ -55,9 +55,8 @@ export class TransacciNNuevaPage {
         }
 
       );
-
+    this.navParams.get("parentPage").reloadList();
     this.navCtrl.pop()
-      this.navCtrl.setRoot(TransaccionesPage)
 
 
   }

@@ -10,16 +10,21 @@
 </ion-header>
 <ion-content padding id="page12">
   <h1 id="calificacion-heading5" style="color:#000000;">
-    Muy buen servicio
+    {{calificacion.titulo}}
   </h1>
   <div id="calificacion-markdown20" class="show-list-numbers-and-dots">
     <p style="color:#000000;">
-      4
+      {{calificacion.calificacion}}
+      <ion-icon *ngIf="calificacion.calificacion >= 1" name="star"></ion-icon>
+      <ion-icon *ngIf="calificacion.calificacion >= 2" name="star" ></ion-icon>
+      <ion-icon *ngIf="calificacion.calificacion >= 3" name="star" ></ion-icon>
+      <ion-icon *ngIf="calificacion.calificacion >= 4" name="star" ></ion-icon>
+      <ion-icon *ngIf="calificacion.calificacion >= 5" name="star" ></ion-icon>
     </p>
   </div>
   <div id="calificacion-markdown21" class="show-list-numbers-and-dots">
     <p style="color:#000000;">
-      Trabajaron muy bien y se los agradesco
+      {{calificacion.detalle}}
     </p>
   </div>
 </ion-content>

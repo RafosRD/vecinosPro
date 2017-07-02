@@ -51,8 +51,9 @@ export class AnuncioNuevoPage {
 
       );
 
+      this.navParams.get("parentPage").reloadList();
       this.navCtrl.pop()
-      this.navCtrl.setRoot(AnunciosPage);
+
 
     // if (!params) params = {};
   }

@@ -10,7 +10,7 @@
 </ion-header>
 <ion-content padding id="page22">
   <ion-list id="perfiles-list13">
-    <ion-searchbar placeholder="" name="" id="perfiles-search2"></ion-searchbar>
+    <ion-searchbar placeholder="" name="" id="perfiles-search2" (ionInput)="getItems($event)"></ion-searchbar>
     <ion-item *ngFor="let perfil of perfiles" color="none" on-click="goToBloque(perfil.id)" id="perfiles-list-item11">
         {{perfil.nombre}}
       <ion-note item-right>

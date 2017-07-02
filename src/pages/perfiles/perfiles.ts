@@ -12,17 +12,14 @@ import {EdificiosService} from "../../services/edificios.service";
 export class PerfilesPage {
 
   perfiles = [];
-  bloqueId = null;
+  public bloque = null;
 
-  constructor(public navCtrl: NavController, public navParams:NavParams, PerfilesService:PerfilesService, public EdificiosService:EdificiosService) {
+  public esta = null;
+  constructor(public navCtrl: NavController, public navParams:NavParams, public PerfilesService:PerfilesService, public EdificiosService:EdificiosService) {
 
-    PerfilesService.getPerfiles()
-      .subscribe( perfiles =>{
-          this.perfiles = perfiles;
-        }
 
-      )
-    this.bloqueId = this.navParams.get('bloqueId');
+    this.initializeItems()
+    this.bloque = this.navParams.get('bloque');
 
 
   }
@@ -31,9 +28,60 @@ export class PerfilesPage {
 
     if (!params) params = {};
 
-    this.EdificiosService.addPerfilToBloque(params,this.bloqueId)
-    this.navCtrl.pop();
-    this.navCtrl.setRoot(BloquePage)
+    this.EdificiosService.getPerfilesEdificiosByPerfilId(params)
+        .once('value')
+        .then(snapshot => {
+
+          for( var i in snapshot.val() ) {
+
+             if(snapshot.val()[i].edificioId == this.bloque.edificioId){
+               this.esta = true
+             }
+
+          }
+          if(!this.esta){
+            this.EdificiosService.addPerfilToBloque(params,this.bloque.id)
+          }
+          this.navParams.get('parentPage').reloadList()
+          this.navCtrl.pop();
+        });
+
+
+
+
+
+
+  }
+  initializeItems(){
+    this.PerfilesService.getPerfiles()
+        .subscribe( perfiles =>{
+              this.perfiles = perfiles;
+            }
+
+        )
+
+  }
+  getItems(searchbar) {
+    // Reset items back to all of the items
+    this.initializeItems();
+
+    // set q to the value of the searchbar
+    var q = searchbar.srcElement.value;
+
+
+    // if the value is an empty string don't filter the items
+    if (!q) {
+      return;
+    }
+
+    this.perfiles = this.perfiles.filter((v) => {
+      if(v.email && q) {
+        if (v.email.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      }
+    });
 
 
   }

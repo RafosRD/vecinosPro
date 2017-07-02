@@ -26,40 +26,7 @@ export class PagosPage {
     //   });
 
 
-    this.AngularFireAuth.authState.subscribe(data =>
-        {
-          this.userId = data.uid;
-          var y = 0
-
-          this.PagosService.getPagosByUserId(this.userId)
-              .once('value')
-              .then(snapshot => {
-
-                for( var i in snapshot.val() ) {
-                  this.pagos[y] = snapshot.val()[i];
-                  y++;
-                }
-              });
-
-
-
-          this.EdificiosService.getEdificiosByAdminId(this.userId)
-              .once('value')
-              .then(snapshot => {
-                for( var i in snapshot.val() ) {
-                  this.PagosService.getPagosByEdificioId(snapshot.val()[i].id)
-                      .once('value')
-                      .then(snapshot => {
-                        for( var x in snapshot.val() ) {
-                          if(snapshot.val()[x].userId != this.userId){
-                            this.pagos[y] = snapshot.val()[x];
-                            y++;
-                          }
-
-                        }});
-                }});
-        }
-    );
+    this.reloadList()
 
 
 
@@ -72,7 +39,44 @@ export class PagosPage {
 
   }goToPagoNuevo(params){
     if (!params) params = {};
-    this.navCtrl.push(PagoNuevoPage);
+    this.navCtrl.push(PagoNuevoPage, {"parentPage":this});
+
+  }
+  public reloadList(){
+      this.AngularFireAuth.authState.subscribe(data =>
+          {
+              this.userId = data.uid;
+              var y = 0
+
+              this.PagosService.getPagosByUserId(this.userId)
+                  .once('value')
+                  .then(snapshot => {
+
+                      for( var i in snapshot.val() ) {
+                          this.pagos[y] = snapshot.val()[i];
+                          y++;
+                      }
+                  });
+
+
+
+              this.EdificiosService.getEdificiosByAdminId(this.userId)
+                  .once('value')
+                  .then(snapshot => {
+                      for( var i in snapshot.val() ) {
+                          this.PagosService.getPagosByEdificioId(snapshot.val()[i].id)
+                              .once('value')
+                              .then(snapshot => {
+                                  for( var x in snapshot.val() ) {
+                                      if(snapshot.val()[x].userId != this.userId){
+                                          this.pagos[y] = snapshot.val()[x];
+                                          y++;
+                                      }
+
+                                  }});
+                      }});
+          }
+      );
 
   }
 }

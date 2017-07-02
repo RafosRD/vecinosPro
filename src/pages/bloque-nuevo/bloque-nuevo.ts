@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, Events} from 'ionic-angular';
 import {EdificiosService} from "../../services/edificios.service";
+import {EdificioPage} from "../../pages/edificio/edificio"
 
 
 @Component({
@@ -11,18 +12,19 @@ export class BloqueNuevoPage {
 
   bloque = {id:null, edificioId:null, nombre:null}
 
-  constructor(public navCtrl: NavController, public navParams:NavParams, public EdificiosService:EdificiosService) {
+  constructor(public navCtrl: NavController, public navParams:NavParams, public EdificiosService:EdificiosService,
+  public events:Events) {
 
 
 
 
   }
   goToEdificio(params){
-
+    if (!params) params = {};
     this.bloque.edificioId = this.navParams.get('edificioId')
     this.EdificiosService.createBloque(this.bloque);
+    this.navParams.get("parentPage").reloadList();
+    this.navCtrl.pop()
 
-    if (!params) params = {};
-    this.navCtrl.goToRoot(this.navCtrl.pop) ;
   }
 }

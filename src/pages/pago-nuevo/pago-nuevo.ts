@@ -88,8 +88,9 @@ export class PagoNuevoPage {
 
 
     if (!params) params = {};
-      this.navCtrl.pop()
-      this.navCtrl.setRoot(PagosPage)
+        this.navParams.get("parentPage").reloadList()
+        this.navCtrl.pop()
+
 
 
   }

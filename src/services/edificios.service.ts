@@ -83,6 +83,9 @@ export class EdificiosService{
   public getPerfilesEdificiosByPerfilId(perfilId){
     return this.afDB.database.ref('perfilEdificio/').orderByChild('perfilId').equalTo(perfilId);
   }
+  public getPerfilesEdificiosByEdificioId(edificioId){
+    return this.afDB.database.ref('perfilEdificio/').orderByChild('edificioId').equalTo(edificioId);
+  }
 
 
 }

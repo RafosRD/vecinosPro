@@ -14,7 +14,7 @@
   </h1>
   <div id="edificio-markdown29" class="show-list-numbers-and-dots">
     <p style="color:#000000;">
-      {{admin.nombre}}
+      {{admin_nombre}}
     </p>
   </div>
   <div id="edificio-markdown33" class="show-list-numbers-and-dots">
@@ -23,7 +23,7 @@
     </p>
   </div>
   <ion-list id="edificio-list11">
-    <ion-item *ngFor="let bloque of bloques" color="none" on-click="goToBloque(bloque.id)" id="edificio-list-item9">
+    <ion-item *ngFor="let bloque of bloques" on-click="goToBloque(bloque.id)" id="edificio-list-item9">
       {{bloque.nombre}}
       <ion-icon name="arrow-forward" item-right></ion-icon>
     </ion-item>

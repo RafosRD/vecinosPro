@@ -47,6 +47,9 @@ export class SuplidoresService{
     calificacion.id = this.afDB.database.ref().child('calificaciones').push().key
     this.afDB.database.ref('calificaciones/'+ calificacion.id).set(calificacion);
   }
+  public editCalificacion(calificacion){
+    this.afDB.database.ref('calificaciones/'+ calificacion.id).set(calificacion);
+  }
 
 
   public getPerfilesCalificaciones(calificacionId){

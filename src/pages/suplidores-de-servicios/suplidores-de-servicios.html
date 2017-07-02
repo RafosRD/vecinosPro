@@ -10,17 +10,25 @@
 </ion-header>
 <ion-content padding id="page4">
   <ion-list id="suplidoresDeServicios-list5">
-    <ion-searchbar placeholder="" name="" id="suplidoresDeServicios-search1"></ion-searchbar>
+    <!--(ionInput)="getItems($event)-->
+    <ion-searchbar placeholder="" name="" id="suplidoresDeServicios-search1 " [(ngModel)]="filtro"></ion-searchbar>
     <ion-item id="suplidoresDeServicios-select1">
       <ion-label>
         Categoria
       </ion-label>
-      <ion-select name=""></ion-select>
+      <ion-select [(ngModel)]="filtroCategoria">
+        <ion-option *ngFor="let categoria of categorias" [value]="categoria.id">
+          {{categoria.id}}
+        </ion-option>
+      </ion-select>
     </ion-item>
+    <button id="pagoNuevo-button14" ion-button color="positive" block on-click="getItems(filtro,filtroCategoria)" >
+      buscar
+    </button>
 
     <ion-item *ngFor="let suplidorp of suplidoresp" color="none" on-click="goToSuplidor(suplidorp.id)" id="suplidoresDeServicios-list-item3">
       <ion-thumbnail item-left>
-        <img />
+        <img img src={{suplidorp.imagen}}/>
       </ion-thumbnail>
       <h2>
         {{suplidorp.nombre}}
@@ -28,6 +36,11 @@
       <ion-note item-bottom>
         {{suplidorp.categoria}}<br/>
         {{suplidorp.calificacion}}
+        <ion-icon *ngIf="suplidorp.calificacion >= 1" name="star"></ion-icon>
+        <ion-icon *ngIf="suplidorp.calificacion >= 2" name="star" ></ion-icon>
+        <ion-icon *ngIf="suplidorp.calificacion >= 3" name="star" ></ion-icon>
+        <ion-icon *ngIf="suplidorp.calificacion >= 4" name="star" ></ion-icon>
+        <ion-icon *ngIf="suplidorp.calificacion >= 5" name="star" ></ion-icon>
       </ion-note>
       <ion-icon name="arrow-forward" item-right></ion-icon>
     </ion-item>
@@ -36,7 +49,12 @@
       {{suplidor.nombre}}
       <ion-note item-right>
         {{suplidor.categoria}}<br/>
-        {{suplidor.calificacion}}
+        <ion-icon *ngIf="suplidor.calificacion >= 1" name="star"></ion-icon>
+        <ion-icon *ngIf="suplidor.calificacion >= 2" name="star" ></ion-icon>
+        <ion-icon *ngIf="suplidor.calificacion >= 3" name="star" ></ion-icon>
+        <ion-icon *ngIf="suplidor.calificacion >= 4" name="star" ></ion-icon>
+        <ion-icon *ngIf="suplidor.calificacion >= 5" name="star" ></ion-icon>
+
       </ion-note>
       <ion-icon name="arrow-forward" item-right></ion-icon>
     </ion-item>

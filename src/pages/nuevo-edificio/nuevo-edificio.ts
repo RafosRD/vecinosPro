@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import { EdificiosPage } from '../edificios/edificios';
 import {EdificiosService} from "../../services/edificios.service";
 import {AngularFireAuth} from "angularfire2/auth/auth";
@@ -13,7 +13,8 @@ export class NuevoEdificioPage {
 
   edificio = {id:null, adminId:null, nombre:null}
 
-  constructor(public navCtrl: NavController, public EdificiosService:EdificiosService, public AngularFireAuth:AngularFireAuth) {
+  constructor(public navCtrl: NavController, public EdificiosService:EdificiosService, public AngularFireAuth:AngularFireAuth,
+  public navParams:NavParams) {
 
 
   }
@@ -27,8 +28,10 @@ export class NuevoEdificioPage {
     );
 
     if (!params) params = {};
+
+    this.navParams.get("parentPage").reloadList();
     this.navCtrl.pop() ;
-    this.navCtrl.setRoot(EdificiosPage)
+
 
   }
 }

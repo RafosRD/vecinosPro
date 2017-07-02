@@ -36,6 +36,9 @@ import {TransaccionesService} from "../services/transacciones.service";
 import {PagosService} from "../services/pagos.service";
 import {QuejasService} from "../services/quejas.service";
 import {SuplidoresService} from "../services/suplidores.service";
+import {CategoriasService} from "../services/categorias.service";
+import {CategoriasSuplidoresImportFB} from "../services/categorias-suplidores"
+
 
 
 
@@ -146,6 +149,8 @@ export const firebaseConfig = {
     PagosService,
     QuejasService,
     SuplidoresService,
+    CategoriasService,
+    CategoriasSuplidoresImportFB,
 
   ]
 })

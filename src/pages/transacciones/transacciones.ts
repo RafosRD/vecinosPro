@@ -23,56 +23,56 @@ export class TransaccionesPage {
     //   });
 
 
-    this.AngularFireAuth.authState.subscribe(data =>
-          {
-            this.userId = data.uid;
-            var y = 0
-
-            this.TransaccionesService.getTransaccionesByUserId(this.userId)
-              .once('value')
-              .then(snapshot => {
-
-                for( var i in snapshot.val() ) {
-                  this.transacciones[y] = snapshot.val()[i];
-                  y++;
-                }
-              });
-
-
-
-            this.EdificiosService.getPerfilesEdificiosByPerfilId(this.userId)
-              .once('value')
-              .then(snapshot => {
-                for( var i in snapshot.val() ) {
-                  this.TransaccionesService.getTransaccionesByEdificioId(snapshot.val()[i].edificioId)
-                    .once('value')
-                    .then(snapshot => {
-                      for( var x in snapshot.val() ) {
-                        if(snapshot.val()[x].userId != this.userId){
-                          this.transacciones[y] = snapshot.val()[x];
-                          y++;
-                        }
-
-                      }});
-                }});
-          }
-        );
-
-
-
-
+    this.reloadList();
 
 
   }
   goToTransacciNNueva(params){
     if (!params) params = {};
-    this.navCtrl.push(TransacciNNuevaPage);
+    this.navCtrl.push(TransacciNNuevaPage,{"parentPage":this});
 
 
   }goToTransaccion(params){
     if (!params) params = {};
     this.navCtrl.push(TransaccionPage, {id:params});
 
+
+  }
+  public reloadList(){
+      this.AngularFireAuth.authState.subscribe(data =>
+          {
+              this.userId = data.uid;
+              var y = 0
+
+              this.TransaccionesService.getTransaccionesByUserId(this.userId)
+                  .once('value')
+                  .then(snapshot => {
+
+                      for( var i in snapshot.val() ) {
+                          this.transacciones[y] = snapshot.val()[i];
+                          y++;
+                      }
+                  });
+
+
+
+              this.EdificiosService.getPerfilesEdificiosByPerfilId(this.userId)
+                  .once('value')
+                  .then(snapshot => {
+                      for( var i in snapshot.val() ) {
+                          this.TransaccionesService.getTransaccionesByEdificioId(snapshot.val()[i].edificioId)
+                              .once('value')
+                              .then(snapshot => {
+                                  for( var x in snapshot.val() ) {
+                                      if(snapshot.val()[x].userId != this.userId){
+                                          this.transacciones[y] = snapshot.val()[x];
+                                          y++;
+                                      }
+
+                                  }});
+                      }});
+          }
+      );
 
   }
 }

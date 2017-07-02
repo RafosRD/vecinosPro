@@ -23,41 +23,7 @@ export class AnunciosPage {
     //     this.anuncios = anuncios;
     //   });
 
-    this.AngularFireAuth.authState.subscribe(data =>
-        {
-          this.userId = data.uid;
-          var y = 0
-
-          this.AnunciosService.getAnunciosByUserId(this.userId)
-              .once('value')
-              .then(snapshot => {
-
-                for( var i in snapshot.val() ) {
-                  this.anuncios[y] = snapshot.val()[i];
-                  y++;
-                }
-              });
-
-
-
-          this.EdificiosService.getPerfilesEdificiosByPerfilId(this.userId)
-              .once('value')
-              .then(snapshot => {
-                for( var i in snapshot.val() ) {
-                  this.AnunciosService.getAnunciosByEdificioId(snapshot.val()[i].edificioId)
-                      .once('value')
-                      .then(snapshot => {
-                        for( var x in snapshot.val() ) {
-                          if(snapshot.val()[x].userId != this.userId){
-                            this.anuncios[y] = snapshot.val()[x];
-                            y++;
-                          }
-
-                        }});
-                }});
-        }
-    );
-
+      this.reloadList();
 
   }
   goToAnuncio(params){
@@ -66,7 +32,44 @@ export class AnunciosPage {
 
   }goToAnuncioNuevo(params){
     if (!params) params = {};
-    this.navCtrl.push(AnuncioNuevoPage, {id:0});
+    this.navCtrl.push(AnuncioNuevoPage, {"parentPage":this});
+ }
+ public reloadList(){
+     this.AngularFireAuth.authState.subscribe(data =>
+         {
+             this.userId = data.uid;
+             var y = 0
+
+             this.AnunciosService.getAnunciosByUserId(this.userId)
+                 .once('value')
+                 .then(snapshot => {
+
+                     for( var i in snapshot.val() ) {
+                         this.anuncios[y] = snapshot.val()[i];
+                         y++;
+                     }
+                 });
+
+
+
+             this.EdificiosService.getPerfilesEdificiosByPerfilId(this.userId)
+                 .once('value')
+                 .then(snapshot => {
+                     for( var i in snapshot.val() ) {
+                         this.AnunciosService.getAnunciosByEdificioId(snapshot.val()[i].edificioId)
+                             .once('value')
+                             .then(snapshot => {
+                                 for( var x in snapshot.val() ) {
+                                     if(snapshot.val()[x].userId != this.userId){
+                                         this.anuncios[y] = snapshot.val()[x];
+                                         y++;
+                                     }
+
+                                 }});
+                     }});
+         }
+     );
+
  }
 
 }

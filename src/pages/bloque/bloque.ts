@@ -25,28 +25,7 @@ export class BloquePage {
         }
 
       )
-
-
-    EdificiosService.getPerfilesBloquesByBloqueId(this.id)
-      .once('value')
-      .then(snapshot => {
-        var y = 0
-        for( var i in snapshot.val() ) {
-
-          this.id = navParams.get('id')
-          PerfilesService.getPerfil(snapshot.val()[i].perfilId)
-            .subscribe( perfil =>{
-              this.perfiles[y] = perfil;
-              y++
-              }
-
-            )
-
-
-        }
-
-      });
-
+      this.reloadList();
 
 
 
@@ -60,7 +39,27 @@ export class BloquePage {
 
   }goToPerfiles(params){
     if (!params) params = {};
-    this.navCtrl.push(PerfilesPage, {bloqueId:params});
+    this.navCtrl.push(PerfilesPage, {bloque:params,'parentPage':this});
 
-  }
+  }reloadList(){
+    this.EdificiosService.getPerfilesBloquesByBloqueId(this.id)
+        .once('value')
+        .then(snapshot => {
+            var y = 0
+            for( var i in snapshot.val() ) {
+
+                this.id = this.navParams.get('id')
+                this.PerfilesService.getPerfil(snapshot.val()[i].perfilId)
+                    .subscribe( perfil =>{
+                            this.perfiles[y] = perfil;
+                            y++
+                        }
+
+                    )
+
+
+            }
+
+        });
+}
 }

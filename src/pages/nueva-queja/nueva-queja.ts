@@ -85,7 +85,9 @@ export class NuevaQuejaPage {
 
 
     if (!params) params = {};
-    this.navCtrl.popToRoot(this.navCtrl.getActive().component);
+    this.navParams.get("parentPage").reloadList();
+    this.navCtrl.pop();
+
   }
 
 

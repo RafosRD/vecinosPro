@@ -22,50 +22,53 @@ export class EdificiosPage {
     //     this.edificios = edificios;
     //   });
 
-    this.AngularFireAuth.authState.subscribe(data =>
-        {
-          this.userId = data.uid;
-          var y = 0
-
-          this.EdificiosService.getEdificiosByAdminId(this.userId)
-              .once('value')
-              .then(snapshot => {
-
-                for( var i in snapshot.val() ) {
-                  this.edificios[y] = snapshot.val()[i];
-                  y++;
-                }
-              });
-
-
-
-          this.EdificiosService.getPerfilesEdificiosByPerfilId(this.userId)
-              .once('value')
-              .then(snapshot => {
-                for( var i in snapshot.val() ) {
-                  this.EdificiosService.getEdificio(snapshot.val()[i].edificioId)
-                      .subscribe(edificio => {
-                        if(edificio.adminId != this.userId){
-                          this.edificios[y] = edificio;
-                          y++;
-
-                        }
-
-                  })
-                }
-              });
-        }
-    );
+   this.reloadList()
 
 
   }goToNuevoEdificio(params){
     if (!params) params = {};
-    this.navCtrl.push(NuevoEdificioPage);
+    this.navCtrl.push(NuevoEdificioPage,{"parentPage":this});
 
   }goToEdificio(params){
     if (!params) params = {};
     this.navCtrl.push(EdificioPage, {id:params});
 
 
-  }
+  }reloadList(){
+    this.AngularFireAuth.authState.subscribe(data =>
+        {
+            this.userId = data.uid;
+            var y = 0
+
+            this.EdificiosService.getEdificiosByAdminId(this.userId)
+                .once('value')
+                .then(snapshot => {
+
+                    for( var i in snapshot.val() ) {
+                        this.edificios[y] = snapshot.val()[i];
+                        y++;
+                    }
+                });
+
+
+
+            this.EdificiosService.getPerfilesEdificiosByPerfilId(this.userId)
+                .once('value')
+                .then(snapshot => {
+                    for( var i in snapshot.val() ) {
+                        this.EdificiosService.getEdificio(snapshot.val()[i].edificioId)
+                            .subscribe(edificio => {
+                                if(edificio.adminId != this.userId){
+                                    this.edificios[y] = edificio;
+                                    y++;
+
+                                }
+
+                            })
+                    }
+                });
+        }
+    );
+
+}
 }
