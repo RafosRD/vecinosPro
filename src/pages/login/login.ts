@@ -15,7 +15,7 @@ import {TabsControllerPage} from '../tabs-controller/tabs-controller';
 export class LoginPage {
   public loading:Loading;
   perfil = {id:null, nombre:null, telefono:null, profecion:null, email:null, password:null}
-  user ={email:'raulovallet@gmail.com', password:'123456'};
+  user ={email:null, password:null};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public LoginService:LoginService, public auth:AngularFireAuth,
               public loadingCtrl: LoadingController, public alertCtrl: AlertController, ){
