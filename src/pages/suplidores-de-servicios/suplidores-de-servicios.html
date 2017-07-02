@@ -36,11 +36,11 @@
       <ion-note item-bottom>
         {{suplidorp.categoria}}<br/>
         {{suplidorp.calificacion}}
-        <ion-icon *ngIf="suplidorp.calificacion >= 1" name="star"></ion-icon>
-        <ion-icon *ngIf="suplidorp.calificacion >= 2" name="star" ></ion-icon>
-        <ion-icon *ngIf="suplidorp.calificacion >= 3" name="star" ></ion-icon>
-        <ion-icon *ngIf="suplidorp.calificacion >= 4" name="star" ></ion-icon>
-        <ion-icon *ngIf="suplidorp.calificacion >= 5" name="star" ></ion-icon>
+        <ion-icon *ngIf="suplidorp.calificacion >= 1" name="star" class="custom-star"></ion-icon>
+        <ion-icon *ngIf="suplidorp.calificacion >= 2" name="star" class="custom-star"></ion-icon>
+        <ion-icon *ngIf="suplidorp.calificacion >= 3" name="star" class="custom-star"></ion-icon>
+        <ion-icon *ngIf="suplidorp.calificacion >= 4" name="star" class="custom-star"></ion-icon>
+        <ion-icon *ngIf="suplidorp.calificacion >= 5" name="star" class="custom-star"></ion-icon>
       </ion-note>
       <ion-icon name="arrow-forward" item-right></ion-icon>
     </ion-item>
